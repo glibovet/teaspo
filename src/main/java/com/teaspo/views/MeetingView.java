@@ -1,47 +1,29 @@
-package com.teaspo.persistence.entities;
+package com.teaspo.views;
 
-import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import java.util.Date;
+import java.sql.Date;
 
 /**
- * Created by mykola.dekhtiarenko on 29.03.17.
+ * Created by Андрій on 03.04.2017.
  */
-@Entity
-@Table(name = "meeting")
-public class MeetingEntity {
+public class MeetingView {
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
     private String description;
 
-    @Column(name = "latitude")
     private Double latitude;
 
-    @Column(name = "longitude")
     private Double longitude;
 
-    @Column(name = "capacity")
     private Integer capacity;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "datetime")
     private Date datetime;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "owner", nullable = false)
-    private UserEntity userEntity;
+    private Integer userEntityId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "place")
-    private PlaceEntity placeEntity;
+    private Integer placeEntityId;
 
 
     @Override
@@ -49,8 +31,13 @@ public class MeetingEntity {
         return "MeetingEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", userEntityId='" + userEntity.getId() + '\'' +
-                ", PlaceEntityId=" + placeEntity.getId() +
+                ", description='" + description + '\'' +
+                ", capacity='" + capacity + '\'' +
+                ", datetime='" + datetime + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", userEntityId='" + userEntityId + '\'' +
+                ", placeEntityId=" + placeEntityId +
                 '}';
     }
 
@@ -75,10 +62,9 @@ public class MeetingEntity {
     public void setDatetime (Date datetime){ this.datetime = datetime; }
     public Date getDatetime (){ return datetime; }
 
-    public void setUserEntity (UserEntity userEntity){ this.userEntity = userEntity; }
-    public UserEntity getUserEntity (){ return userEntity; }
+    public void setUserEntityId (Integer userEntityId){ this.userEntityId = userEntityId; }
+    public Integer getUserEntityId (){ return userEntityId; }
 
-    public void setPlaceEntity (PlaceEntity id){ this.placeEntity = placeEntity; }
-    public PlaceEntity getPlaceEntity (){ return placeEntity; }
-
+    public void setPlaceEntityId (Integer placeEntityId){ this.placeEntityId = placeEntityId; }
+    public Integer getPlaceEntityId (){ return placeEntityId; }
 }

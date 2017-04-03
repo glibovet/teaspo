@@ -68,7 +68,7 @@ public class PlaceServiceImpl implements IPlaceService {
             entity.setWeb(view.getWeb());
             entity.setStatus(view.getStatus());
             entity.setShortlink(view.getShortlink());
-            entity.setResponsibleUser(usersRepository.findOne(view.getId()));
+            entity.setResponsibleUser(usersRepository.findOne(view.getRespUserId()));
             entity = placesRepository.saveAndFlush(entity);
             return entity.getId();
         }
