@@ -42,6 +42,8 @@ public class MeetingServiceImpl implements IMeetingService {
         return meeting;
     }
 
+    @Override
+    @Transactional
     public List<MeetingEntity> getMeetings(int offset, int limit) throws NoSuchEntityException{
         Page<MeetingEntity> list = meetingRepository.findAll(new PageRequest(offset/limit,limit));
         if(list == null || list.getContent().isEmpty())
