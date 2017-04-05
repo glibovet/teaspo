@@ -7,6 +7,7 @@ import com.teaspo.persistence.entities.PlaceEntity;
 import com.teaspo.pojo.other.Response;
 import com.teaspo.services.utils.IMeetingService;
 import com.teaspo.services.utils.ResponseFactory;
+import com.teaspo.views.MeetingView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -44,5 +45,29 @@ public class MeetingApiController {
             @RequestParam(value = "limit", required = false, defaultValue = "10") int limit
     ) throws TeaSpoException {
         return responseFactory.get(meetingService.getMeetings(offset, limit));
+    }
+
+    @RequestMapping(
+            value = "/create",
+            method = RequestMethod.PUT
+    )
+    public
+    @ResponseBody Response<Integer>
+    createMeeting(
+            @RequestBody MeetingView view
+    ) throws TeaSpoException {
+        return responseFactory.get(meetingService.create(view));
+    }
+
+    @RequestMapping(
+            value = "/update",
+            method = RequestMethod.POST
+    )
+    public
+    @ResponseBody Response<MeetingEntity>
+    update(
+            @RequestBody MeetingView view
+    ) throws NoSuchEntityException {
+        return responseFactory.get(meetingService.update(view));
     }
 }
