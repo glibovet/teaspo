@@ -81,4 +81,39 @@ public class MeetingEntity {
     public void setPlaceEntity (PlaceEntity id){ this.placeEntity = placeEntity; }
     public PlaceEntity getPlaceEntity (){ return placeEntity; }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MeetingEntity)) return false;
+
+        MeetingEntity that = (MeetingEntity) o;
+
+        if (!getId().equals(that.getId())) return false;
+        if (!getName().equals(that.getName())) return false;
+        if (getDescription() != null ? !getDescription().equals(that.getDescription()) : that.getDescription() != null)
+            return false;
+        if (getLatitude() != null ? !getLatitude().equals(that.getLatitude()) : that.getLatitude() != null)
+            return false;
+        if (getLongitude() != null ? !getLongitude().equals(that.getLongitude()) : that.getLongitude() != null)
+            return false;
+        if (getCapacity() != null ? !getCapacity().equals(that.getCapacity()) : that.getCapacity() != null)
+            return false;
+        if (!getDatetime().equals(that.getDatetime())) return false;
+        if (!getUserEntity().equals(that.getUserEntity())) return false;
+        return getPlaceEntity() != null ? getPlaceEntity().equals(that.getPlaceEntity()) : that.getPlaceEntity() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId().hashCode();
+        result = 31 * result + getName().hashCode();
+        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+        result = 31 * result + (getLatitude() != null ? getLatitude().hashCode() : 0);
+        result = 31 * result + (getLongitude() != null ? getLongitude().hashCode() : 0);
+        result = 31 * result + (getCapacity() != null ? getCapacity().hashCode() : 0);
+        result = 31 * result + getDatetime().hashCode();
+        result = 31 * result + getUserEntity().hashCode();
+        result = 31 * result + (getPlaceEntity() != null ? getPlaceEntity().hashCode() : 0);
+        return result;
+    }
 }
