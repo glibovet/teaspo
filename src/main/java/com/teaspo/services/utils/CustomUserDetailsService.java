@@ -43,6 +43,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     private List<GrantedAuthority> getGrantedAuthorities(UserEntity user){
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         for (PermissionEntity perm:user.getRoleEntity().getPermissions()){
+            System.out.println(user.getRoleEntity());
+            System.out.println(user.getRoleEntity().getPermissions());
             authorities.add(new SimpleGrantedAuthority(perm.getName()));
         }
         return authorities;

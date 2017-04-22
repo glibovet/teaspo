@@ -8,12 +8,19 @@
 <!DOCTYPE HTML>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <html lang="en-US">
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+
+<sec:authentication var="user" property="principal" />
+<sec:authorize var="loggedIn" access="isAuthenticated()" />
+
 <head>
   <!---METADATA--->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale = 1.0">
   <meta name="description" content="Great resource which will help you to find your best sport team to play with" />
-  <title>Teaspo.com</title>
+  <title>Teaspo</title>
 
   <!---FONTS--->
   <link href='http://fonts.googleapis.com/css?family=Roboto:300,400' rel='stylesheet' type='text/css'>
@@ -51,8 +58,12 @@
     <a href="#"> <text class="glyphicon glyphicon-th-list"></text> Мої події</a>
     <a href="#"> <text class="glyphicon glyphicon-map-marker"></text> Майданчики</a>
     <a href="#"> <text class="glyphicon glyphicon-play"></text> Ігри</a>
-    <a href="#"> <text class="glyphicon glyphicon-earphone"></text> Контакти</a>
-    <a href="web/admin/"> <text class="glyphicon glyphicon-earphone"></text>Admin page</a>
+    <%--<a href="#"> <text class="glyphicon glyphicon-earphone"></text> Контакти</a>--%>
+
+    <sec:authorize access="hasAuthority('ROLE_ADMIN')">
+      <a href="web/admin/"> <text class="glyphicon glyphicon-eye-open"></text>Сторінка адміна</a>
+    </sec:authorize>
+
   </div>
 </div>
 <div class="container" id="main2">
@@ -62,7 +73,16 @@
     </li>
     <li class="hidden-xs codrops-icon codrops-icon-prev left"><text  style="font-size:30px;font-family:Oswald; padding:20px;";>TEASPO</text></li>
     <li><a class="codrops-icon codrops-icon-prev right" href=""><text class="glyphicon glyphicon-cog" style="font-size:20px;"></text></a></li>
-    <li><a class="codrops-icon codrops-icon-drop right" href=""><text class="glyphicon glyphicon-user" style="font-size:20px;"></text><span class="hidden-xs"> Профіль</span></a></li>
+    <c:choose>
+      <c:when test="${loggedIn}">
+        <li><a class="codrops-icon codrops-icon-drop right" href=""><text class="glyphicon glyphicon-user" style="font-size:20px;"></text><span class="hidden-xs"> Профіль </span></a></li>
+      </c:when>
+      <c:otherwise>
+        <li><a class="codrops-icon codrops-icon-drop right" href="/login"><text class="glyphicon glyphicon-user" style="font-size:20px;"></text><span class="hidden-xs"> Увійти</span></a></li>
+      </c:otherwise>
+    </c:choose>
+
+
   </ul>
 </div><!-- /container -->
 
@@ -138,8 +158,6 @@
     <text class="footertext"> Teaspo.com Corporation License (c)</text>
   </footer>
 </div> <!-- /MAIN CONTAINER -->
-
-
 
 </body>
 </html>

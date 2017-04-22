@@ -114,7 +114,7 @@
 
         <security:form-login
                 login-page="/login"
-                default-target-url="/web/admin/"
+                default-target-url="/"
                 authentication-failure-url="/login?error"
                 username-parameter="username"
                 password-parameter="password" />
