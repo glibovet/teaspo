@@ -14,9 +14,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class UserController {
 
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-    public String editAuthor(@PathVariable("id") int id,
+    public String editUser(@PathVariable("id") int id,
                              Model model){
         model.addAttribute("id", id);
         return "/admin/userEdit";
+    }
+
+    @RequestMapping(value="/{id}/show", method=RequestMethod.GET)
+    public String showUser(@PathVariable("id") int id,
+                           Model model){
+        model.addAttribute("id", id);
+        return "/user/userPage";
     }
 }

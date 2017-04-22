@@ -20,7 +20,7 @@
 
     <!--JAVASCRIPT-->
     <script type="text/javascript" src="/resources/js/jquery.1.10.2.min.js"></script>
-    <script type="text/javascript" src="/resources/js/userpageEd.js"></script>
+    <script type="text/javascript" src="/resources/js/user/userPage.js"></script>
 
     <!--BOOTSTRAP-->
     <!-- Latest compiled and minified CSS -->

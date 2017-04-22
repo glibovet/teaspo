@@ -27,7 +27,7 @@
     <tr ng-repeat="user in users">
 
         <td>{{user.id}}</td>
-        <td>{{user.nikname}}</td>
+        <td><a href="/web/admin/{{user.id}}/show">{{user.nikname}}</a></td>
         <td>{{user.state}}</td>
         <td>{{user.email}}</td>
         <td><a href="/web/admin/{{user.id}}/edit" class="glyphicon glyphicon-pencil"></a></td>
