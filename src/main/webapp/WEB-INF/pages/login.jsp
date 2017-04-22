@@ -12,7 +12,7 @@
 </head>
 <body>
 <h1>Login</h1>
-<form name='form' action="welcome" method='POST'>
+<form name='form' action="/login" method='POST'>
     <table>
         <tr>
             <td>User:</td>

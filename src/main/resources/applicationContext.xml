@@ -112,12 +112,12 @@
         <!-- access denied page -->
         <security:access-denied-handler error-page="/403" />
 
-        <!--<security:form-login
+        <security:form-login
                 login-page="/login"
-                default-target-url="/welcome"
+                default-target-url="/web/admin/"
                 authentication-failure-url="/login?error"
                 username-parameter="username"
-                password-parameter="password" />-->
+                password-parameter="password" />
         <security:logout invalidate-session="true" logout-success-url="/login?logout"/>
         <!-- enable csrf protection -->
         <!--<security:csrf disabled="true"/>-->
@@ -127,7 +127,8 @@
     <!-- Select users and user_roles from database -->
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="customUserDetailsService">
-            <security:password-encoder hash="md5"/>
+            <!--<security:password-encoder hash="md5"/>-->
+
         </security:authentication-provider>
     </security:authentication-manager>
 

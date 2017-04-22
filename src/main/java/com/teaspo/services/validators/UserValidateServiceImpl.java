@@ -29,6 +29,7 @@ public class UserValidateServiceImpl implements IUserValidateService {
     public void validForCreate(UserView user) throws ServiceErrorException, ValidationException {
         Set<ConstraintViolation<UserView>> violations = validator.validate(user);
         if(violations != null && !violations.isEmpty()) {
+            System.out.println(violations.toString());
             throw new ValidationException(UserEntity.class.getName(), violations);
         }
         if (!sessionUtils.isAuthorized()){

@@ -15,10 +15,12 @@ public class AdminController {
     public String adminPage(){
         return "/admin/admin";
     }
+
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public String userEditPage(){
         return "WEB-INF/pages/admin/userEdit";
     }
+
 
 
 }
