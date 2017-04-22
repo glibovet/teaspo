@@ -1,6 +1,7 @@
 package com.teaspo.controllers.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,6 +20,8 @@ public class AdminController {
     public String userEditPage(){
         return "WEB-INF/pages/admin/userEdit";
     }
-
+    public String userPage(){
+        return "WEB-INF/pages/user/userPage";
+    }
 
 }
