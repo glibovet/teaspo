@@ -155,4 +155,46 @@ public class PlaceEntity {
     public void setResponsibleUser(UserEntity responsibleUser) {
         this.responsibleUser = responsibleUser;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PlaceEntity)) return false;
+
+        PlaceEntity entity = (PlaceEntity) o;
+
+        if (!getId().equals(entity.getId())) return false;
+        if (!getName().equals(entity.getName())) return false;
+        if (getDescription() != null ? !getDescription().equals(entity.getDescription()) : entity.getDescription() != null)
+            return false;
+        if (!getShortlink().equals(entity.getShortlink())) return false;
+        if (getEmail() != null ? !getEmail().equals(entity.getEmail()) : entity.getEmail() != null) return false;
+        if (getPhone() != null ? !getPhone().equals(entity.getPhone()) : entity.getPhone() != null) return false;
+        if (getWeb() != null ? !getWeb().equals(entity.getWeb()) : entity.getWeb() != null) return false;
+        if (getContacts() != null ? !getContacts().equals(entity.getContacts()) : entity.getContacts() != null)
+            return false;
+        if (getLatitude() != null ? !getLatitude().equals(entity.getLatitude()) : entity.getLatitude() != null)
+            return false;
+        if (getLongtitude() != null ? !getLongtitude().equals(entity.getLongtitude()) : entity.getLongtitude() != null)
+            return false;
+        if (getStatus() != null ? !getStatus().equals(entity.getStatus()) : entity.getStatus() != null) return false;
+        return getResponsibleUser() != null ? getResponsibleUser().equals(entity.getResponsibleUser()) : entity.getResponsibleUser() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId().hashCode();
+        result = 31 * result + getName().hashCode();
+        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+        result = 31 * result + getShortlink().hashCode();
+        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
+        result = 31 * result + (getPhone() != null ? getPhone().hashCode() : 0);
+        result = 31 * result + (getWeb() != null ? getWeb().hashCode() : 0);
+        result = 31 * result + (getContacts() != null ? getContacts().hashCode() : 0);
+        result = 31 * result + (getLatitude() != null ? getLatitude().hashCode() : 0);
+        result = 31 * result + (getLongtitude() != null ? getLongtitude().hashCode() : 0);
+        result = 31 * result + (getStatus() != null ? getStatus().hashCode() : 0);
+        result = 31 * result + (getResponsibleUser() != null ? getResponsibleUser().hashCode() : 0);
+        return result;
+    }
 }

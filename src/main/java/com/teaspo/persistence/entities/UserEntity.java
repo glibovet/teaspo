@@ -25,6 +25,12 @@ public class UserEntity {
     @Column(name = "nikname")
     private String nikname;
 
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "town")
+    private String town;
+
     @Column(name = "active")
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private Boolean active;
@@ -84,6 +90,26 @@ public class UserEntity {
 
     public void setRoleEntity(RoleEntity roleEntity) {
         this.roleEntity = roleEntity;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
+    }
+
+    public Boolean getActive() {
+        return active;
     }
 
     @Override

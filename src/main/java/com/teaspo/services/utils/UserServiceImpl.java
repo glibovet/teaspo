@@ -64,6 +64,7 @@ public class UserServiceImpl implements IUserService {
         return user;
     }
 
+
     @Override
     @Transactional
     public Map<String, Object> getUserByIdMap(int userId, Set<String> fields) throws NoSuchEntityException {
@@ -83,6 +84,7 @@ public class UserServiceImpl implements IUserService {
         return list.getContent();
     }
 
+    
     @Override
     @Transactional
     public List<Map<String, Object>> getUsersMap(int offset, int limit, Set<String> fields) throws NoSuchEntityException {
