@@ -1,5 +1,7 @@
 package com.teaspo.controllers.web;
 
+import com.teaspo.persistence.dao.MeetingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(value = "/")
 public class GeneralController {
+
+    @Autowired
+    MeetingRepository meetingRepository;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(
@@ -27,6 +32,17 @@ public class GeneralController {
             model.addObject("msg", "You've been logged out successfully.");
         }
         model.setViewName("login");
+
+        return model;
+
+    }
+
+    @RequestMapping(value = "/events", method = RequestMethod.GET)
+    public ModelAndView index() {
+
+        ModelAndView model = new ModelAndView();
+        model.addObject("events", meetingRepository.findAll());
+        model.setViewName("common/eventList");
 
         return model;
 
