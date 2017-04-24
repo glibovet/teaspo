@@ -1,6 +1,9 @@
 package com.teaspo.views;
 
-import java.sql.Date;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
 
 /**
  * Created by Андрій on 03.04.2017.
@@ -19,27 +22,14 @@ public class MeetingView {
 
     private Integer capacity;
 
-    private Date datetime;
+    private String type;
+
+    private String datetime;
 
     private Integer userEntityId;
 
     private Integer placeEntityId;
 
-
-    @Override
-    public String toString() {
-        return "MeetingEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", capacity='" + capacity + '\'' +
-                ", datetime='" + datetime + '\'' +
-                ", latitude='" + latitude + '\'' +
-                ", longitude='" + longitude + '\'' +
-                ", userEntityId='" + userEntityId + '\'' +
-                ", placeEntityId=" + placeEntityId +
-                '}';
-    }
 
     public void setId (Integer id){ this.id = id; }
     public Integer getId (){ return id; }
@@ -59,12 +49,41 @@ public class MeetingView {
     public void setCapacity (Integer capacity){ this.capacity = capacity; }
     public Integer getCapacity (){ return capacity; }
 
-    public void setDatetime (Date datetime){ this.datetime = datetime; }
-    public Date getDatetime (){ return datetime; }
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public void setUserEntityId (Integer userEntityId){ this.userEntityId = userEntityId; }
     public Integer getUserEntityId (){ return userEntityId; }
 
     public void setPlaceEntityId (Integer placeEntityId){ this.placeEntityId = placeEntityId; }
     public Integer getPlaceEntityId (){ return placeEntityId; }
+
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
+    }
+
+    @Override
+    public String toString() {
+        return "MeetingView{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", capacity=" + capacity +
+                ", type='" + type + '\'' +
+                ", datetime='" + datetime + '\'' +
+                ", userEntityId=" + userEntityId +
+                ", placeEntityId=" + placeEntityId +
+                '}';
+    }
 }

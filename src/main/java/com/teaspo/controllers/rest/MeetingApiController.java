@@ -48,7 +48,7 @@ public class MeetingApiController {
     }
 
     @RequestMapping(
-            value = "/create",
+            value = "/",
             method = RequestMethod.PUT
     )
     public

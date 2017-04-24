@@ -1,0 +1,1 @@
+ALTER TABLE teaspo.meeting MODIFY datetime VARCHAR(20) NOT NULL;

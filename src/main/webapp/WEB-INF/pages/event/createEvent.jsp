@@ -16,6 +16,7 @@
 
     <!--JAVASCRIPT-->
     <script type="text/javascript" src="../../../resources/js/jquery.1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js/event/createEvent.js"></script>
 
     <!--BOOTSTRAP-->
     <!-- Latest compiled and minified CSS -->
@@ -31,6 +32,7 @@
 
     <!--LESS-->
     <link rel="stylesheet/less" type="text/css" href="../../../resources/less/common/eventCreate.less"/>
+
     <!-- LESS JavaScript компілятор -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
@@ -40,10 +42,17 @@
 
 </head>
 <body>
+<script>
+    var HEADERS = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    };
+
+</script>
 <div class="container-fluid">
 <a href="/" id="linkBack">GO BACK</a>
 <p>CREATE EVENT</p>
-<form>
+<form action="javascript:void(0);">
     <div class="row">
         <div class="col-md-6">
             <div class="col-md-6">
@@ -52,7 +61,7 @@
             <div class="col-md-6">
                 <label> DATE </label>
                 <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' required class="form-control"/>
+                    <input type='text' id="datetime" required class="form-control"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -90,15 +99,16 @@
                     <script>
                         var map;
                         var markers = [];
+                        markers[0] = "default";
 
                         function initMap() {
                             map = new google.maps.Map(document.getElementById('map'), {
-                                center: {lat: -34.397, lng: 150.644},
+                                center: {lat: 50.46422477192736, lng: 30.518689155578613},
                                 zoom: 8
                             });
 
                             map.addListener('click', function(event) {
-                               deleteMarkers();
+                                deleteMarkers();
                                 addMarker(event.latLng);
                             });
                         }
@@ -109,13 +119,14 @@
                                 position: location,
                                 map: map
                             });
-                            markers[0]=(marker);
+                            console.log(marker);
+                            markers[0]= marker;
                         }
 
                         // Sets the map on all markers in the array.
                         function setMapOnAll(map) {
-                            for (var i = 0; i < markers.length; i++) {
-                                markers[i].setMap(map);
+                            if(markers[0]!="default"){
+                                markers[0].setMap(map);
                             }
                         }
 
@@ -141,7 +152,7 @@
     <div class="col-xs-12">
         <div class="col-xs-0 col-md-4"></div>
         <div class="col-xs-12 col-md-4">
-            <button id="submit" class="saveBtn">CREATE</button>
+            <input id="submit" type="submit" value="CREATE" class="saveBtn">
         </div>
         <div class="col-xs-0 col-md-4"></div>
 

@@ -1,0 +1,1 @@
+ALTER TABLE teaspo.meeting ADD type VARCHAR(20) NULL;

@@ -31,9 +31,11 @@ public class MeetingEntity {
     @Column(name = "capacity")
     private Integer capacity;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "datetime")
-    private Date datetime;
+    private String datetime;
+
+    @Column(name = "type")
+    private String type;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner", nullable = false)
@@ -43,16 +45,6 @@ public class MeetingEntity {
     @JoinColumn(name = "place")
     private PlaceEntity placeEntity;
 
-
-    @Override
-    public String toString() {
-        return "MeetingEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", userEntityId='" + userEntity.getId() + '\'' +
-                ", PlaceEntityId=" + placeEntity.getId() +
-                '}';
-    }
 
     public void setId (Integer id){ this.id = id; }
     public Integer getId (){ return id; }
@@ -69,17 +61,51 @@ public class MeetingEntity {
     public void setLongitude (Double longitude){ this.longitude = longitude; }
     public Double getLongitude (){ return longitude; }
 
-    public void setCapacity (Integer capacity){ this.capacity = capacity; }
-    public Integer getCapacity (){ return capacity; }
+    public Integer getCapacity() {
+        return capacity;
+    }
 
-    public void setDatetime (Date datetime){ this.datetime = datetime; }
-    public Date getDatetime (){ return datetime; }
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
+    }
 
     public void setUserEntity (UserEntity userEntity){ this.userEntity = userEntity; }
     public UserEntity getUserEntity (){ return userEntity; }
 
     public void setPlaceEntity (PlaceEntity id){ this.placeEntity = placeEntity; }
     public PlaceEntity getPlaceEntity (){ return placeEntity; }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "MeetingEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", capacity=" + capacity +
+                ", datetime='" + datetime + '\'' +
+                ", type='" + type + '\'' +
+                ", userEntity=" + userEntity +
+                ", placeEntity=" + placeEntity +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -88,7 +114,7 @@ public class MeetingEntity {
 
         MeetingEntity that = (MeetingEntity) o;
 
-        if (!getId().equals(that.getId())) return false;
+        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
         if (!getName().equals(that.getName())) return false;
         if (getDescription() != null ? !getDescription().equals(that.getDescription()) : that.getDescription() != null)
             return false;
@@ -99,19 +125,21 @@ public class MeetingEntity {
         if (getCapacity() != null ? !getCapacity().equals(that.getCapacity()) : that.getCapacity() != null)
             return false;
         if (!getDatetime().equals(that.getDatetime())) return false;
+        if (getType() != null ? !getType().equals(that.getType()) : that.getType() != null) return false;
         if (!getUserEntity().equals(that.getUserEntity())) return false;
         return getPlaceEntity() != null ? getPlaceEntity().equals(that.getPlaceEntity()) : that.getPlaceEntity() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = getId().hashCode();
+        int result = getId() != null ? getId().hashCode() : 0;
         result = 31 * result + getName().hashCode();
         result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
         result = 31 * result + (getLatitude() != null ? getLatitude().hashCode() : 0);
         result = 31 * result + (getLongitude() != null ? getLongitude().hashCode() : 0);
         result = 31 * result + (getCapacity() != null ? getCapacity().hashCode() : 0);
         result = 31 * result + getDatetime().hashCode();
+        result = 31 * result + (getType() != null ? getType().hashCode() : 0);
         result = 31 * result + getUserEntity().hashCode();
         result = 31 * result + (getPlaceEntity() != null ? getPlaceEntity().hashCode() : 0);
         return result;

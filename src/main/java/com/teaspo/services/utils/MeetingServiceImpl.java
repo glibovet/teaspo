@@ -7,14 +7,22 @@ import com.teaspo.persistence.dao.MeetingRepository;
 import com.teaspo.persistence.dao.PlaceRepository;
 import com.teaspo.persistence.dao.UsersRepository;
 import com.teaspo.persistence.entities.MeetingEntity;
+import com.teaspo.persistence.entities.UserEntity;
+import com.teaspo.services.converters.Fields;
 import com.teaspo.views.MeetingView;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+
+import java.sql.Date;
 import java.util.List;
+
 
 /**
  * Created by Андрій on 03.04.2017.
@@ -54,23 +62,31 @@ public class MeetingServiceImpl implements IMeetingService {
     @Override
     @Transactional
     public int create(MeetingView view) throws ServiceErrorException, SuchEntityExistsExeption {
-        try {
-            getMeetingById(view.getId());
-            throw new SuchEntityExistsExeption(view.getName()+" "+view.getId());
-        } catch (NoSuchEntityException e) {
             MeetingEntity entity = new MeetingEntity();
-            entity.setId(view.getId());
-            entity.setName(view.getName());
+            System.out.println(view.getDatetime());
+
+
+        entity.setName(view.getName());
             entity.setDescription(view.getDescription());
             entity.setLatitude(view.getLatitude());
             entity.setLongitude(view.getLongitude());
             entity.setCapacity(view.getCapacity());
             entity.setDatetime(view.getDatetime());
-            entity.setUserEntity(usersRepository.findOne(view.getUserEntityId()));
-            entity.setPlaceEntity(placeRepository.findOne(view.getPlaceEntityId()));
+            entity.setType(view.getType());
+            if(view.getUserEntityId()!=null) {
+                entity.setUserEntity(usersRepository.findOne(view.getUserEntityId()));
+            }
+
+            if(view.getPlaceEntityId()!=null) {
+                entity.setPlaceEntity(placeRepository.findOne(view.getPlaceEntityId()));
+            }
+
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            UserDetails userDetail = (UserDetails) auth.getPrincipal();
+            entity.setUserEntity(usersRepository.findByEmail(userDetail.getUsername()));
+
             entity = meetingRepository.saveAndFlush(entity);
             return entity.getId();
-        }
     }
 
     @Override
