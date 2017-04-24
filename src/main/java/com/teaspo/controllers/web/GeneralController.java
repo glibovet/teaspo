@@ -42,11 +42,19 @@ public class GeneralController {
 
         ModelAndView model = new ModelAndView();
         model.addObject("events", meetingRepository.findAll());
-        model.setViewName("common/eventList");
+        model.setViewName("event/listEvents");
 
         return model;
 
     }
+
+    @RequestMapping(value = "/events/create", method = RequestMethod.GET)
+    public ModelAndView createEvent() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("event/createEvent");
+        return model;
+    }
+
 
 
 }
