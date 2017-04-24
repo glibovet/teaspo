@@ -28,7 +28,6 @@ $(document).ready(function () {
 
 function processData() {
     meeting = {};
-    meeting["subject"]=$('#subject').val();
     meeting["name"]=$('#name').val();
     meeting["description"]=$('#description').val();
     meeting["datetime"]=$('#datetime').val();

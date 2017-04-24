@@ -63,10 +63,9 @@ public class MeetingServiceImpl implements IMeetingService {
     @Transactional
     public int create(MeetingView view) throws ServiceErrorException, SuchEntityExistsExeption {
             MeetingEntity entity = new MeetingEntity();
-            System.out.println(view.getDatetime());
 
 
-        entity.setName(view.getName());
+            entity.setName(view.getName());
             entity.setDescription(view.getDescription());
             entity.setLatitude(view.getLatitude());
             entity.setLongitude(view.getLongitude());

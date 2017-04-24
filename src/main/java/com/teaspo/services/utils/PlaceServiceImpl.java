@@ -10,6 +10,9 @@ import com.teaspo.views.PlaceView;
 import com.teaspo.views.UserView;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,8 +46,8 @@ public class PlaceServiceImpl implements IPlaceService {
     @Override
     @Transactional
     public List<PlaceEntity> getPlaces(int offset, int limit) throws NoSuchEntityException {
-        Page<PlaceEntity> list = placesRepository.findAll(new PageRequest(offset/limit,limit));
-        if(list == null || list.getContent().isEmpty())
+        Page<PlaceEntity> list = placesRepository.findAll(new PageRequest(offset / limit, limit));
+        if (list == null || list.getContent().isEmpty())
             throw new NoSuchEntityException("place", String.format("[offset: %d, limit: %d]", offset, limit));
         return list.getContent();
     }
@@ -52,32 +55,30 @@ public class PlaceServiceImpl implements IPlaceService {
     @Override
     @Transactional
     public int create(PlaceView view) throws ServiceErrorException, SuchEntityExistsExeption {
-        try {
-            getPlaceById(view.getId());
-            throw new SuchEntityExistsExeption(view.getName()+" "+view.getId());
-        } catch (NoSuchEntityException e) {
-            PlaceEntity entity = new PlaceEntity();
-            entity.setId(view.getId());
-            entity.setEmail(view.getEmail());
-            entity.setDescription(view.getDescription());
-            entity.setContacts(view.getContacts());
-            entity.setName(view.getName());
-            entity.setLatitude(view.getLatitude());
-            entity.setLongtitude(view.getLongtitude());
-            entity.setPhone(view.getPhone());
-            entity.setWeb(view.getWeb());
-            entity.setStatus(view.getStatus());
-            entity.setShortlink(view.getShortlink());
-            entity.setResponsibleUser(usersRepository.findOne(view.getRespUserId()));
-            entity = placesRepository.saveAndFlush(entity);
-            return entity.getId();
-        }
+        PlaceEntity entity = new PlaceEntity();
+        entity.setEmail(view.getEmail());
+        entity.setDescription(view.getDescription());
+        entity.setContacts(view.getContacts());
+        entity.setName(view.getName());
+        entity.setLatitude(view.getLatitude());
+        entity.setLongtitude(view.getLongtitude());
+        entity.setPhone(view.getPhone());
+        entity.setWeb(view.getWeb());
+        entity.setStatus(view.getStatus());
+        entity.setShortlink(view.getShortlink());
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+
+        entity.setResponsibleUser(usersRepository.findByEmail(userDetail.getUsername()));
+        entity = placesRepository.saveAndFlush(entity);
+        return entity.getId();
     }
 
     @Override
     @Transactional
     public PlaceEntity update(PlaceView view) throws NoSuchEntityException {
-        PlaceEntity place =  getPlaceById(view.getId());
+        PlaceEntity place = getPlaceById(view.getId());
         place.setContacts(view.getContacts());
         place.setEmail(view.getEmail());
         place.setResponsibleUser(usersRepository.findOne(view.getRespUserId()));

@@ -55,6 +55,13 @@ public class GeneralController {
         return model;
     }
 
+    @RequestMapping(value = "/places/create", method = RequestMethod.GET)
+    public ModelAndView createPlace() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("place/addPlace");
+        return model;
+    }
+
 
 
 }
