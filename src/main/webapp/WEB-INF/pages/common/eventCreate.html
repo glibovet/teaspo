@@ -1,5 +1,4 @@
 <html>
-<body>
 <head>
   <!---METADATA--->
   <meta charset="UTF-8">
@@ -12,11 +11,10 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Playfair+Display|Roboto+Condensed|Ubuntu+Condensed" rel="stylesheet">
 
   <!---CSS--->
-  <link rel="stylesheet" href="resources/libraries/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../../../resources/libraries/font-awesome-4.7.0/css/font-awesome.min.css">
 
   <!--JAVASCRIPT-->
-  <script type="text/javascript" src="../../resources/js/jquery.1.10.2.min.js"></script>
-  <script type="text/javascript" src="resources/js/menu.js"></script>
+  <script type="text/javascript" src="../../../resources/js/jquery.1.10.2.min.js"></script>
 
   <!--BOOTSTRAP-->
   <!-- Latest compiled and minified CSS -->
@@ -30,10 +28,56 @@
   <link rel="stylesheet/less" type="text/css" href="../../../resources/less/common/eventCreate.less" />
   <!-- LESS JavaScript компілятор -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>   
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
   <!--ICONS-->
 
 </head>
+<body>
+<a href="" id="linkBack">GO BACK</a><p>CREATE EVENT</p>
+    <form>
+
+<div class="col-md-6">
+    <div class="col-md-6">
+    <label> NAME </label><input class="form-control col-md-3" required type="text" placeholder="Name of your event"></div>
+    <div class="col-md-6">
+    <label> DATE </label>
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' required class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+                    format: 'YYYY-MM-DD HH:mm'
+                });
+            });
+        </script>
+    </div>
+     <div class="col-md-12">
+    <label> DESCRIPTION </label>
+    <textarea rows="10" class="form-control" required placeholder="Description"></textarea>
+    </div>
+    <div class="col-md-3">
+        <label>CAPACITY</label>
+    <input class="form-control" type="text" required placeholder="amount">
+    </div>
+    <div class="col-md-6">
+        <label> SPORT TYPE </label>
+        <select class="form-control" type="text" placeholder="Sport type">
+            <option>Basketball</option>
+        </select>
+    </div>
+</div>
+<div id="addPlace" class="col-md-6">
+    <div><img class="mapfield img-responsive col-xs-12 col-sm-12" src="http://yava.ro/wp-content/plugins/responsive-maps-plugin/documentation/assets/images/5.png"></div>
+
+</div>
+<input type="submit" class="saveBtn" value="CREATE">
+</form>
 </body>
 
 </html>
