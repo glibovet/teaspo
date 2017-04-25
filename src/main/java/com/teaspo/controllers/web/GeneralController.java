@@ -65,13 +65,20 @@ public class GeneralController {
         model.setViewName("event/eventShow");
         return model;
     }
+    @RequestMapping(value = "/places", method = RequestMethod.GET)
+    public ModelAndView indexPlace() {
+        ModelAndView model = new ModelAndView();
+        model.addObject("places", placeRepository.findAll());
+        model.setViewName("place/placesList");
+        return model;
+    }
     @RequestMapping(value = "/places/create", method = RequestMethod.GET)
     public ModelAndView createPlace() {
         ModelAndView model = new ModelAndView();
         model.setViewName("place/addPlace");
         return model;
     }
-    @RequestMapping(value="/places/{id)", method=RequestMethod.GET)
+    @RequestMapping(value="/places/{id}", method=RequestMethod.GET)
     public ModelAndView showPlace(@PathVariable("id") int id){
         ModelAndView model = new ModelAndView();
         model.addObject("place", placeRepository.findOne(id));

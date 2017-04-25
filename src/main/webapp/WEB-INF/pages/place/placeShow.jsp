@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
   <!---METADATA--->
@@ -15,7 +17,7 @@
 
   <!--JAVASCRIPT-->
   <script type="text/javascript" src="../../../resources/js/jquery.1.10.2.min.js"></script>
-      <script type="text/javascript" src="../../../resources/js/places/placeShow.js"></script>
+      <script type="text/javascript" src="../../../resources/js/place/placeShow.js"></script>
 
 
   <!--BOOTSTRAP-->
@@ -50,8 +52,19 @@
             <label>Description:</label><br><text id="description">${place.description}</text><br>
         </div>
         <div class="col-md-6">
-            
-                <div id="map"><img class=" img-responsive col-xs-12 col-sm-12" src="http://yava.ro/wp-content/plugins/responsive-maps-plugin/documentation/assets/images/5.png"></div>
+                <script>
+                    function initMap() {
+                        var uluru = {lat:${place.latitude}, lng:${place.longtitude}};
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 16,
+                            center: uluru
+                        });
+                        var marker = new google.maps.Marker({
+                            position: uluru,
+                            map: map
+                        });
+                    }</script>
+                <div id="map"></div>
         </div>
         <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWIyt56lBFvS8tsH3SihrK3ID8DQsyDBg&callback=initMap">
