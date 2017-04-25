@@ -119,7 +119,12 @@ public class GeneralController {
         return model;
     }
 
+    @RequestMapping(value = "/myevents", method = RequestMethod.GET)
+    public ModelAndView myEvents() throws NoSuchEntityException {
+        ModelAndView model = new ModelAndView();
+        model.addObject("events", meetingService.getMeetingsByUser());
+        model.setViewName("event/listEvents");
+        return model;
 
-
-    
+    }
 }

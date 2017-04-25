@@ -152,7 +152,29 @@
                     <div id="container" class="cardContainer">
                         <h2 class="cardTitle">${event.name}</h2>
                         <div class="img-wrapper">
-                            <img class="img-responsive" src="../../resources/img/football_pitch-wallpaper-1366x768.jpg">
+                            <c:choose>
+                                <c:when test="${event.type=='Football'}">
+                                    <img class="img-responsive"
+                                         src="../../resources/img/football.jpg">
+                                </c:when>
+                                <c:when test="${event.type=='Basketball'}">
+                                    <img class="img-responsive"
+                                         src="../../resources/img/basketball.jpg">
+                                </c:when>
+                                <c:when test="${event.type=='Hockey'}">
+                                    <img class="img-responsive"
+                                         src="../../resources/img/hockey.jpg">
+                                </c:when>
+                                <c:when test="${event.type=='Tennis'}">
+                                    <img class="img-responsive"
+                                         src="../../resources/img/tennis.jpg">
+                                </c:when>
+                                <c:when test="${event.type=='Voleyball'}">
+                                    <img class="img-responsive"
+                                         src="../../resources/img/volleyball.jpg">
+                                </c:when>
+                            </c:choose>
+
                         </div>
                         <p class="detail"><label>Description: </label> ${event.description}</p>
                         <p class="detail"><label>Sport type: </label> ${event.type}</p>

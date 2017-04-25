@@ -7,6 +7,7 @@ import com.teaspo.persistence.entities.MeetingEntity;
 import com.teaspo.views.MeetingView;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Андрій on 03.04.2017.
@@ -16,6 +17,8 @@ public interface IMeetingService {
     MeetingEntity getMeetingById(int MeetingId) throws NoSuchEntityException;
 
     List<MeetingEntity> getMeetings(int offset, int limit) throws NoSuchEntityException;
+
+    Set<MeetingEntity> getMeetingsByUser() throws NoSuchEntityException;
 
     int create(MeetingView view) throws ServiceErrorException, SuchEntityExistsExeption;
 

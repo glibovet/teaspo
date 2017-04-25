@@ -49,7 +49,7 @@ public class MeetingEntity {
     private PlaceEntity placeEntity;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "meeting_has_users", joinColumns = @JoinColumn(name = "Meeting_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"))
     private Set<UserEntity> subscribers;
 
@@ -127,8 +127,8 @@ public class MeetingEntity {
 
         MeetingEntity that = (MeetingEntity) o;
 
-        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
-        if (!getName().equals(that.getName())) return false;
+        if (!getId().equals(that.getId())) return false;
+        if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null) return false;
         if (getDescription() != null ? !getDescription().equals(that.getDescription()) : that.getDescription() != null)
             return false;
         if (getLatitude() != null ? !getLatitude().equals(that.getLatitude()) : that.getLatitude() != null)
@@ -137,9 +137,11 @@ public class MeetingEntity {
             return false;
         if (getCapacity() != null ? !getCapacity().equals(that.getCapacity()) : that.getCapacity() != null)
             return false;
-        if (!getDatetime().equals(that.getDatetime())) return false;
+        if (getDatetime() != null ? !getDatetime().equals(that.getDatetime()) : that.getDatetime() != null)
+            return false;
         if (getType() != null ? !getType().equals(that.getType()) : that.getType() != null) return false;
-        if (!getUserEntity().equals(that.getUserEntity())) return false;
+        if (getUserEntity() != null ? !getUserEntity().equals(that.getUserEntity()) : that.getUserEntity() != null)
+            return false;
         if (getPlaceEntity() != null ? !getPlaceEntity().equals(that.getPlaceEntity()) : that.getPlaceEntity() != null)
             return false;
         return getSubscribers() != null ? getSubscribers().equals(that.getSubscribers()) : that.getSubscribers() == null;
@@ -147,17 +149,17 @@ public class MeetingEntity {
 
     @Override
     public int hashCode() {
-        int result = getId() != null ? getId().hashCode() : 0;
-        result = 31 * result + getName().hashCode();
+        int result = getId().hashCode();
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
         result = 31 * result + (getLatitude() != null ? getLatitude().hashCode() : 0);
         result = 31 * result + (getLongitude() != null ? getLongitude().hashCode() : 0);
         result = 31 * result + (getCapacity() != null ? getCapacity().hashCode() : 0);
-        result = 31 * result + getDatetime().hashCode();
+        result = 31 * result + (getDatetime() != null ? getDatetime().hashCode() : 0);
         result = 31 * result + (getType() != null ? getType().hashCode() : 0);
-        result = 31 * result + getUserEntity().hashCode();
+        result = 31 * result + (getUserEntity() != null ? getUserEntity().hashCode() : 0);
         result = 31 * result + (getPlaceEntity() != null ? getPlaceEntity().hashCode() : 0);
-//        result = 31 * result + (getSubscribers() != null ? getSubscribers().hashCode() : 0);
+        result = 31 * result + (getSubscribers() != null ? getSubscribers().hashCode() : 0);
         return result;
     }
 }
