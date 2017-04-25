@@ -60,13 +60,34 @@
     <button class="saveBtn">GET INVOLVED</button>
 </div>
 <div class="col-md-6">
-    <div id="map">
-        <c:choose>
-            <c:when test="${event.latitude}">
-                <img class="img-responsive"
-                     src="../../resources/img/football.jpg">
-            </c:when>
-            <c:otherwise>
+
+    <c:choose>
+        <c:when test="${empty event.latitude}">
+            <c:choose>
+                <c:when test="${event.type=='Football'}">
+                    <img class="img-responsive"
+                         src="../../resources/img/football.jpg">
+                </c:when>
+                <c:when test="${event.type=='Basketball'}">
+                    <img class="img-responsive"
+                         src="../../resources/img/basketball.jpg">
+                </c:when>
+                <c:when test="${event.type=='Hockey'}">
+                    <img class="img-responsive"
+                         src="../../resources/img/hockey.jpg">
+                </c:when>
+                <c:when test="${event.type=='Tennis'}">
+                    <img class="img-responsive"
+                         src="../../resources/img/tennis.jpg">
+                </c:when>
+                <c:when test="${event.type=='Voleyball'}">
+                    <img class="img-responsive"
+                         src="../../resources/img/volleyball.jpg">
+                </c:when>
+            </c:choose>
+        </c:when>
+        <c:otherwise>
+            <div id="map">
                 <script>
                     function initMap() {
                         var uluru = {lat:${event.latitude}, lng: ${event.longitude}};
@@ -80,10 +101,11 @@
                         });
                     }
                 </script>
-            </c:otherwise>
-        </c:choose>
+            </div>
 
-    </div>
+        </c:otherwise>
+    </c:choose>
+
 </div>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWIyt56lBFvS8tsH3SihrK3ID8DQsyDBg&callback=initMap">

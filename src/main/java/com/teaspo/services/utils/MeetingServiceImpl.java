@@ -8,7 +8,6 @@ import com.teaspo.persistence.dao.PlaceRepository;
 import com.teaspo.persistence.dao.UsersRepository;
 import com.teaspo.persistence.entities.MeetingEntity;
 import com.teaspo.persistence.entities.UserEntity;
-import com.teaspo.services.converters.Fields;
 import com.teaspo.views.MeetingView;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,8 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
-import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -57,6 +56,14 @@ public class MeetingServiceImpl implements IMeetingService {
         if(list == null || list.getContent().isEmpty())
             throw new NoSuchEntityException("meeting", String.format("[offset: %d, limit: %d]", offset, limit));
         return list.getContent();
+    }
+
+    @Override
+    public Set<MeetingEntity> getMeetingsByUser() throws NoSuchEntityException {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        UserEntity user = usersRepository.findByEmail(userDetail.getUsername());
+        return user.getMeetings();
     }
 
     @Override

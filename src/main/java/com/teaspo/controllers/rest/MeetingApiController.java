@@ -47,6 +47,7 @@ public class MeetingApiController {
         return responseFactory.get(meetingService.getMeetings(offset, limit));
     }
 
+
     @RequestMapping(
             value = "/",
             method = RequestMethod.PUT

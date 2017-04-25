@@ -1,6 +1,7 @@
 package com.teaspo.persistence.dao;
 
 import com.teaspo.persistence.entities.MeetingEntity;
+import com.teaspo.persistence.entities.UserEntity;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Propagation;
