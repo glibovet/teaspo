@@ -93,10 +93,11 @@
         </li>
         <c:choose>
             <c:when test="${loggedIn}">
-                <li><a class="codrops-icon codrops-icon-drop" href="">
+                <li><a href="/logout" class="hidden-xs right"> LOGOUT </a></li>
+
+                <li><a class="codrops-icon codrops-icon-drop left" href="/profile">
                     <text class="glyphicon glyphicon-user" style="font-size:20px;"></text>
-                    <span class="hidden-xs"> ACCOUNT </span></a></li>
-                   <li> <a href="/logout" class="hidden-xs right"> LOGOUT </a></li>
+                    <span class="hidden-xs "> ACCOUNT </span></a></li>
 
             </c:when>
             <c:otherwise>

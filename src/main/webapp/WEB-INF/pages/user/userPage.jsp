@@ -10,7 +10,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <!DOCTYPE HTML>
-<html ng-app="showUser">
+<html>
 <head>
     <!---METADATA--->
     <meta charset="UTF-8">
@@ -41,7 +41,7 @@
     <!--BOOTSTRAP FROM HELPER-->
     <script type="text/javascript" src="/resources/libraries/FormHelper/js/bootstrap-formhelpers-countries.js"></script>
     <!--LESS-->
-    <link rel="stylesheet/less" type="text/css" href="/resources/less/userpageEd.less" />
+    <link rel="stylesheet/less" type="text/css" href="../../resources/less/userpageEd.less" />
     <!-- LESS JavaScript компілятор -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
 
@@ -53,19 +53,19 @@
 
 
 
-<div class="container col-xs-12" ng-controller="user_data_controller">
+<div class="container col-xs-12">
     <div>
 
         <div class="text-center profileHeader">
             <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
-            <h3 class="nickname">{{user.nikname}}</h3>
-            <h4><text class="city">Sandusky,</text><text class="country">USA</text></h4>
-            <span class="skillsMenu"><strong>Skills: </strong></span>
-            <span class="label label-warning ">Football <text class="glyphicon glyphicon-remove"></text></span>
-            <span class="label label-info">Hockey <text class="glyphicon glyphicon-remove"></text></span>
-            <span class="label label-info">Voleyball <text class="glyphicon glyphicon-remove"></text></span>
-            <span class="label label-success ">Basketball <text class="glyphicon glyphicon-remove"></text></span>
-            <span class="glyphicon glyphicon-pencil" style="color:white"></span>
+            <h3 class="nickname">${profile.nikname}</h3>
+            <h4><text class="city">${profile.country}</text><text class="country">, ${profile.town}</text></h4>
+            <%--<span class="skillsMenu"><strong>Skills: </strong></span>--%>
+            <%--<span class="label label-warning ">Football <text class="glyphicon glyphicon-remove"></text></span>--%>
+            <%--<span class="label label-info">Hockey <text class="glyphicon glyphicon-remove"></text></span>--%>
+            <%--<span class="label label-info">Voleyball <text class="glyphicon glyphicon-remove"></text></span>--%>
+            <%--<span class="label label-success ">Basketball <text class="glyphicon glyphicon-remove"></text></span>--%>
+            <%--<span class="glyphicon glyphicon-pencil" style="color:white"></span>--%>
         </div>
     </div>
     <div class="row profile">

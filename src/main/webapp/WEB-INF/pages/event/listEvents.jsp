@@ -88,6 +88,8 @@
         </li>
         <c:choose>
             <c:when test="${loggedIn}">
+                <li><a href="/logout" class="hidden-xs right"> LOGOUT </a></li>
+
                 <li><a class="codrops-icon codrops-icon-drop right" href="">
                     <text class="glyphicon glyphicon-user" style="font-size:20px;"></text>
                     <span class="hidden-xs"> Профіль </span></a></li>

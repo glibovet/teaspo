@@ -53,14 +53,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="#" onclick="showUsers()">Users <span class="sr-only"></span></a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Fields <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Show all</a></li>
-                            <li><a href="#">Add new</a></li>
-                            <li><a href="#">Confirm</a></li>
-                        </ul>
-                    </li>
+
                 </ul>
                 <div class="form col-xs-4">
                     <input type="text" class="form-control" placeholder="Search">
