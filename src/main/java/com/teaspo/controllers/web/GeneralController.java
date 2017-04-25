@@ -2,11 +2,16 @@ package com.teaspo.controllers.web;
 
 import com.teaspo.exceptions.NoSuchEntityException;
 import com.teaspo.persistence.dao.MeetingRepository;
+import com.teaspo.persistence.dao.UsersRepository;
+import com.teaspo.persistence.entities.UserEntity;
 import com.teaspo.services.utils.IMeetingService;
 import com.teaspo.persistence.dao.PlaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +36,8 @@ public class GeneralController {
     @Autowired
     PlaceRepository placeRepository;
 
-
+    @Autowired
+    UsersRepository userRepository;
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index() throws NoSuchEntityException {
         ModelAndView model = new ModelAndView();
@@ -59,7 +65,16 @@ public class GeneralController {
         return model;
 
     }
-
+    @RequestMapping(value="/profile", method=RequestMethod.GET)
+    public ModelAndView profile(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        UserEntity user = userRepository.findByEmail(userDetail.getUsername());
+        ModelAndView model=new ModelAndView();
+        model.addObject("profile", user);
+        model.setViewName("user/userPage");
+        return model;
+    }
     @RequestMapping(value = "/events", method = RequestMethod.GET)
     public ModelAndView events() {
         ModelAndView model = new ModelAndView();
@@ -103,6 +118,8 @@ public class GeneralController {
         model.setViewName("place/placeShow");
         return model;
     }
+
+
 
     
 }

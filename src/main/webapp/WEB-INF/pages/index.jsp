@@ -93,10 +93,11 @@
         </li>
         <c:choose>
             <c:when test="${loggedIn}">
-                <li><a class="codrops-icon codrops-icon-drop" href="">
+                <li><a href="/logout" class="hidden-xs right"> LOGOUT </a></li>
+
+                <li><a class="codrops-icon codrops-icon-drop left" href="/profile">
                     <text class="glyphicon glyphicon-user" style="font-size:20px;"></text>
-                    <span class="hidden-xs"> ACCOUNT </span></a></li>
-                   <li> <a href="/logout" class="hidden-xs right"> LOGOUT </a></li>
+                    <span class="hidden-xs "> ACCOUNT </span></a></li>
 
             </c:when>
             <c:otherwise>
@@ -156,7 +157,7 @@
                         <p class="detail"><label>Description: </label> ${event.description}</p>
                         <p class="detail"><label>Sport type: </label> ${event.type}</p>
                         <p class="detail"><label>Capacity: </label> ${event.capacity}</p>
-                        <a href="/meeting/${event.id}" class="btn btn2 glyphicon glyphicon-menu-right"></a>
+                        <a href="/events/${event.id}" class="btn btn2 glyphicon glyphicon-menu-right"></a>
                     </div>
                 </div>
             </c:forEach>
