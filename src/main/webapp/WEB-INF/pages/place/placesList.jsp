@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <!---METADATA--->
@@ -18,7 +19,7 @@
     <!--JAVASCRIPT-->
     <script type="text/javascript" src="../../../resources/js/jquery.1.10.2.min.js"></script>
     <script type="text/javascript" src="../../../resources/js/menu.js"></script>
-        <script type="text/javascript" src="../../../resources/js/places/placeShow.js"></script>
+        <script type="text/javascript" src="../../../resources/js/place/placeShow.js"></script>
 
 
     <!--BOOTSTRAP-->
@@ -62,7 +63,6 @@
       <span onclick="openNav()" class="glyphicon glyphicon-menu-hamburger navbar-brand" id=""></span>
     </li>
     <li class="hidden-xs codrops-icon codrops-icon-prev left"><text  style="font-size:30px;font-family:Oswald; padding:20px;";>TEASPO</text></li>
-    <li><a class="codrops-icon codrops-icon-prev right" href=""><text class="glyphicon glyphicon-cog" style="font-size:20px;"></text></a></li>
     <c:choose>
       <c:when test="${loggedIn}">
         <li><a class="codrops-icon codrops-icon-drop right" href=""><text class="glyphicon glyphicon-user" style="font-size:20px;"></text><span class="hidden-xs"> Профіль </span></a></li>
@@ -78,24 +78,22 @@
 <div id="main" href="javascript:void(0)" onclick="closeNav()">
 <p id="events">FIELDS</p>
 <div id="games container">
-    <c:forEach var="event" items="${events}">
+    <c:forEach var="place" items="${places}">
         <div class="card col-xs-12 col-sm-6 col-md-4 col-lg-3">
             <div id="container" class="cardContainer">
-                <h2 class="cardTitle">${event.name}</h2>
-                <div class="img-wrapper">
-                    <div id="map"></div>
-<!--                    <img class="img-responsive" src="http://www.hervormdbodegraven.nl/uploads/news/id1176/beach.jpg">-->
-                </div>
-                <a href="/meeting/${event.id}" class="btn glyphicon glyphicon-menu-right"></a>
+                <h2 class="cardTitle">${place.name}</h2>
+                <a href="/places/${place.id}" class="btn glyphicon glyphicon-menu-right"></a>
 
-                <p class="detail">${event.description}</p>
-                <p class="detail">${event.capacity}</p>
+                <p class="detail"><label>Description:  </label>${place.description}</p>
+                <p class="detail"><label>Phone number: </label>${place.phone}</p>
+                <p class="detail"><label>Email: </label>${place.email}</p>
+
             </div>
         </div>
     </c:forEach>
 </div>
     
-<a href="/meeting/create" class="btn2 glyphicon glyphicon-plus"></a>
+<a href="/places/create" class="btn2 glyphicon glyphicon-plus"></a>
 </div>
    <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWIyt56lBFvS8tsH3SihrK3ID8DQsyDBg&callback=initMap">
