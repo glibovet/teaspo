@@ -64,7 +64,6 @@ public class MeetingServiceImpl implements IMeetingService {
     public int create(MeetingView view) throws ServiceErrorException, SuchEntityExistsExeption {
             MeetingEntity entity = new MeetingEntity();
 
-
             entity.setName(view.getName());
             entity.setDescription(view.getDescription());
             entity.setLatitude(view.getLatitude());
@@ -72,6 +71,7 @@ public class MeetingServiceImpl implements IMeetingService {
             entity.setCapacity(view.getCapacity());
             entity.setDatetime(view.getDatetime());
             entity.setType(view.getType());
+
             if(view.getUserEntityId()!=null) {
                 entity.setUserEntity(usersRepository.findOne(view.getUserEntityId()));
             }

@@ -1,8 +1,15 @@
 package com.teaspo.controllers.web;
 
+import com.teaspo.exceptions.NoSuchEntityException;
 import com.teaspo.persistence.dao.MeetingRepository;
+import com.teaspo.services.utils.IMeetingService;
+import com.teaspo.persistence.dao.PlaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +24,22 @@ public class GeneralController {
 
     @Autowired
     MeetingRepository meetingRepository;
+
+    @Autowired
+    IMeetingService meetingService;
+
+    @Autowired
+    PlaceRepository placeRepository;
+
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView index() throws NoSuchEntityException {
+        ModelAndView model = new ModelAndView();
+        model.addObject("events", meetingService.getMeetings(0, 4));
+        model.setViewName("index");
+        return model;
+    }
+
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(
@@ -38,8 +61,7 @@ public class GeneralController {
     }
 
     @RequestMapping(value = "/events", method = RequestMethod.GET)
-    public ModelAndView index() {
-
+    public ModelAndView events() {
         ModelAndView model = new ModelAndView();
         model.addObject("events", meetingRepository.findAll());
         model.setViewName("event/listEvents");
@@ -54,14 +76,33 @@ public class GeneralController {
         model.setViewName("event/createEvent");
         return model;
     }
-
+    @RequestMapping(value="/events/{id}", method=RequestMethod.GET)
+    public ModelAndView eventShow(@PathVariable("id") int id){
+        ModelAndView model=new ModelAndView();
+        model.addObject("event", meetingRepository.findOne(id));
+        model.setViewName("event/eventShow");
+        return model;
+    }
+    @RequestMapping(value = "/places", method = RequestMethod.GET)
+    public ModelAndView indexPlace() {
+        ModelAndView model = new ModelAndView();
+        model.addObject("places", placeRepository.findAll());
+        model.setViewName("place/placesList");
+        return model;
+    }
     @RequestMapping(value = "/places/create", method = RequestMethod.GET)
     public ModelAndView createPlace() {
         ModelAndView model = new ModelAndView();
         model.setViewName("place/addPlace");
         return model;
     }
+    @RequestMapping(value="/places/{id}", method=RequestMethod.GET)
+    public ModelAndView showPlace(@PathVariable("id") int id){
+        ModelAndView model = new ModelAndView();
+        model.addObject("place", placeRepository.findOne(id));
+        model.setViewName("place/placeShow");
+        return model;
+    }
 
-
-
+    
 }
