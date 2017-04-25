@@ -1,8 +1,10 @@
 package com.teaspo.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by Andrii on 15.11.2016.
@@ -38,6 +40,15 @@ public class UserEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", nullable = false)
     private RoleEntity roleEntity;
+
+
+    @ManyToMany(mappedBy = "subscribers", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<MeetingEntity> meetings;
+
+    public Set<MeetingEntity> getMeetings(){return meetings;}
+
+    public void setMeetings (Set<MeetingEntity> meetings){this.meetings=meetings;}
 
     @PrePersist
     protected void onCreate() {
@@ -115,27 +126,30 @@ public class UserEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof UserEntity)) return false;
 
         UserEntity that = (UserEntity) o;
 
-        if (id != that.id) return false;
-        if (active != that.active) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (nikname != null ? !nikname.equals(that.nikname) : that.nikname != null) return false;
-        return roleEntity != null ? roleEntity.equals(that.roleEntity) : that.roleEntity == null;
-
+        if (getId() != that.getId()) return false;
+        if (!getEmail().equals(that.getEmail())) return false;
+        if (!getPassword().equals(that.getPassword())) return false;
+        if (getNikname() != null ? !getNikname().equals(that.getNikname()) : that.getNikname() != null) return false;
+        if (getCountry() != null ? !getCountry().equals(that.getCountry()) : that.getCountry() != null) return false;
+        if (getTown() != null ? !getTown().equals(that.getTown()) : that.getTown() != null) return false;
+        if (!getRoleEntity().equals(that.getRoleEntity())) return false;
+        return getMeetings() != null ? getMeetings().equals(that.getMeetings()) : that.getMeetings() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (nikname != null ? nikname.hashCode() : 0);
-        result = 31 * result + (active ? 1 : 0);
-        result = 31 * result + (roleEntity != null ? roleEntity.hashCode() : 0);
+        int result = getId();
+        result = 31 * result + getEmail().hashCode();
+        result = 31 * result + getPassword().hashCode();
+        result = 31 * result + (getNikname() != null ? getNikname().hashCode() : 0);
+        result = 31 * result + (getCountry() != null ? getCountry().hashCode() : 0);
+        result = 31 * result + (getTown() != null ? getTown().hashCode() : 0);
+        result = 31 * result + getRoleEntity().hashCode();
+        //result = 31 * result + (getMeetings() != null ? getMeetings().hashCode() : 0);
         return result;
     }
 
@@ -148,6 +162,7 @@ public class UserEntity {
                 ", name='" + nikname + '\'' +
                 ", active=" + active +
                 ", roleEntity=" + roleEntity +
+                ", meetings=" + meetings +
                 '}';
     }
 }

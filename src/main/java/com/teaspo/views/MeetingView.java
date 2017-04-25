@@ -1,9 +1,13 @@
 package com.teaspo.views;
 
 
+import com.teaspo.persistence.entities.MeetingEntity;
+import com.teaspo.persistence.entities.UserEntity;
+
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by Андрій on 03.04.2017.
@@ -30,6 +34,10 @@ public class MeetingView {
 
     private Integer placeEntityId;
 
+    private Set<UserEntity> subscribers;
+
+    public Set<UserEntity> getSubscribers(){return subscribers;}
+    public void setSubscribers(Set<UserEntity> subscribers){this.subscribers=subscribers;}
 
     public void setId (Integer id){ this.id = id; }
     public Integer getId (){ return id; }

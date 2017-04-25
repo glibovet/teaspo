@@ -1,8 +1,11 @@
 package com.teaspo.persistence.entities;
 
+import org.springframework.security.core.userdetails.User;
+
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by mykola.dekhtiarenko on 29.03.17.
@@ -44,6 +47,15 @@ public class MeetingEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "place")
     private PlaceEntity placeEntity;
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "meeting_has_users", joinColumns = @JoinColumn(name = "Meeting_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"))
+    private Set<UserEntity> subscribers;
+
+    public Set<UserEntity> getSubscribers(){return subscribers;}
+
+    public void setSubscribers(Set<UserEntity> subscribers){this.subscribers=subscribers;}
 
 
     public void setId (Integer id){ this.id = id; }
@@ -104,6 +116,7 @@ public class MeetingEntity {
                 ", type='" + type + '\'' +
                 ", userEntity=" + userEntity +
                 ", placeEntity=" + placeEntity +
+                ", subscribers=" + subscribers +
                 '}';
     }
 
@@ -127,7 +140,9 @@ public class MeetingEntity {
         if (!getDatetime().equals(that.getDatetime())) return false;
         if (getType() != null ? !getType().equals(that.getType()) : that.getType() != null) return false;
         if (!getUserEntity().equals(that.getUserEntity())) return false;
-        return getPlaceEntity() != null ? getPlaceEntity().equals(that.getPlaceEntity()) : that.getPlaceEntity() == null;
+        if (getPlaceEntity() != null ? !getPlaceEntity().equals(that.getPlaceEntity()) : that.getPlaceEntity() != null)
+            return false;
+        return getSubscribers() != null ? getSubscribers().equals(that.getSubscribers()) : that.getSubscribers() == null;
     }
 
     @Override
@@ -142,6 +157,7 @@ public class MeetingEntity {
         result = 31 * result + (getType() != null ? getType().hashCode() : 0);
         result = 31 * result + getUserEntity().hashCode();
         result = 31 * result + (getPlaceEntity() != null ? getPlaceEntity().hashCode() : 0);
+//        result = 31 * result + (getSubscribers() != null ? getSubscribers().hashCode() : 0);
         return result;
     }
 }
