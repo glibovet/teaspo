@@ -36,10 +36,7 @@
 
 </head>
     <body>
-<!--         <a href="javascript:history.back()">Go Back</a>-->
-
             <p class="teaspo">${event.name}</p>
-<!--            <img src="../../../resources/img/logomapcut.png" class="mapfield img-responsive centered-and-cropped">-->
         <div class="information col-md-6">
             <br>
             <label>When:</label><text>${event.datetime}</text><br>
