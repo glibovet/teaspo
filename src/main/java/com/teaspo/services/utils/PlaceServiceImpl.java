@@ -65,7 +65,7 @@ public class PlaceServiceImpl implements IPlaceService {
         entity.setPhone(view.getPhone());
         entity.setWeb(view.getWeb());
         entity.setStatus(view.getStatus());
-        entity.setShortlink(view.getShortlink());
+        entity.setShortlink(""+view.getId());
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetail = (UserDetails) auth.getPrincipal();

@@ -1,7 +1,11 @@
 package com.teaspo.controllers.web;
 
+import com.teaspo.exceptions.NoSuchEntityException;
 import com.teaspo.persistence.dao.MeetingRepository;
+import com.teaspo.services.utils.IMeetingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +21,18 @@ public class GeneralController {
 
     @Autowired
     MeetingRepository meetingRepository;
+
+    @Autowired
+    IMeetingService meetingService;
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView index() throws NoSuchEntityException {
+        ModelAndView model = new ModelAndView();
+        model.addObject("events", meetingService.getMeetings(0, 4));
+        model.setViewName("index");
+        return model;
+    }
+
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(
@@ -38,7 +54,7 @@ public class GeneralController {
     }
 
     @RequestMapping(value = "/events", method = RequestMethod.GET)
-    public ModelAndView index() {
+    public ModelAndView events() {
 
         ModelAndView model = new ModelAndView();
         model.addObject("events", meetingRepository.findAll());
