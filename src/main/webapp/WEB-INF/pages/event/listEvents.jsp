@@ -48,7 +48,7 @@
                 <div class="img-wrapper">
                     <img class="img-responsive" src="http://www.hervormdbodegraven.nl/uploads/news/id1176/beach.jpg">
                 </div>
-                <a href="/meeting/${event.id}" class="btn glyphicon glyphicon-menu-right"></a>
+                <a href="/events/${event.id}" class="btn glyphicon glyphicon-menu-right"></a>
 
                 <p class="detail">${event.description}</p>
                 <p class="detail">${event.capacity}</p>

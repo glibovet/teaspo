@@ -39,16 +39,15 @@
     <body>
 <!--         <a href="javascript:history.back()">Go Back</a>-->
 
-            <p class="teaspo"> STADIUM "DYNAMO" </p>
+            <p class="teaspo"> ${place.name} </p>
 <!--            <img src="../../../resources/img/logomapcut.png" class="mapfield img-responsive centered-and-cropped">-->
         <div class="information col-md-6">
-            <text class="title"> </text>   
             <br>
-            <label>EMAIL:</label><text>dynamo@gmail.com</text><br>
-            <label>PHONE:</label><text>+3806385082674</text><br>
-            <label>CONTACTS: </label><text>Petrenko Igor Vasylovych</text><br>
-            <label>LINK: </label><text><a href="http://www.fcdynamo.kiev.ua/ru/club/stadium/tour/">http://www.fcdynamo.kiev.ua/ru/club/stadium/tour/</a></text><br>
-            <label>Description:</label><br><text id="description"> Good stadium for a game </text><br>
+            <label>EMAIL:</label><text>${place.email}</text><br>
+            <label>PHONE:</label><text>${place.phone}</text><br>
+            <label>CONTACTS: </label><text>${place.contacts}</text><br>
+            <label>LINK: </label><text><a href="${place.web}">${place.web}</a></text><br>
+            <label>Description:</label><br><text id="description">${place.description}</text><br>
         </div>
         <div class="col-md-6">
             
