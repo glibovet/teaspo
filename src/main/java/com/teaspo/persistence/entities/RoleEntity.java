@@ -52,21 +52,20 @@ public class RoleEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof RoleEntity)) return false;
 
         RoleEntity that = (RoleEntity) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (name != that.name) return false;
-        return permissions != null ? permissions.equals(that.permissions) : that.permissions == null;
-
+        if (!getId().equals(that.getId())) return false;
+        if (getName() != that.getName()) return false;
+        return getPermissions() != null ? getPermissions().equals(that.getPermissions()) : that.getPermissions() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (permissions != null ? permissions.hashCode() : 0);
+        int result = getId().hashCode();
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getPermissions() != null ? getPermissions().hashCode() : 0);
         return result;
     }
 

@@ -110,7 +110,28 @@
             <div id="container" class="cardContainer">
                 <h2 class="cardTitle">${event.name}</h2>
                 <div class="img-wrapper">
-                    <img class="img-responsive" src="http://www.hervormdbodegraven.nl/uploads/news/id1176/beach.jpg">
+                    <c:choose>
+                        <c:when test="${event.type=='Football'}">
+                            <img class="img-responsive"
+                                 src="../../resources/img/football.jpg">
+                        </c:when>
+                        <c:when test="${event.type=='Basketball'}">
+                            <img class="img-responsive"
+                                 src="../../resources/img/basketball.jpg">
+                        </c:when>
+                        <c:when test="${event.type=='Hockey'}">
+                            <img class="img-responsive"
+                                 src="../../resources/img/hockey.jpg">
+                        </c:when>
+                        <c:when test="${event.type=='Tennis'}">
+                            <img class="img-responsive"
+                                 src="../../resources/img/tennis.jpg">
+                        </c:when>
+                        <c:when test="${event.type=='Voleyball'}">
+                            <img class="img-responsive"
+                                 src="../../resources/img/volleyball.jpg">
+                        </c:when>
+                    </c:choose>
                 </div>
                 <a href="/events/${event.id}" class="btn glyphicon glyphicon-menu-right"></a>
                 <p class="detail"><label>Description: </label> ${event.description}</p>

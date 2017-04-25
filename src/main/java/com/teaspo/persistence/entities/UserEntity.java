@@ -136,7 +136,6 @@ public class UserEntity {
         if (getNikname() != null ? !getNikname().equals(that.getNikname()) : that.getNikname() != null) return false;
         if (getCountry() != null ? !getCountry().equals(that.getCountry()) : that.getCountry() != null) return false;
         if (getTown() != null ? !getTown().equals(that.getTown()) : that.getTown() != null) return false;
-        if (!getRoleEntity().equals(that.getRoleEntity())) return false;
         return getMeetings() != null ? getMeetings().equals(that.getMeetings()) : that.getMeetings() == null;
     }
 
@@ -148,8 +147,6 @@ public class UserEntity {
         result = 31 * result + (getNikname() != null ? getNikname().hashCode() : 0);
         result = 31 * result + (getCountry() != null ? getCountry().hashCode() : 0);
         result = 31 * result + (getTown() != null ? getTown().hashCode() : 0);
-        result = 31 * result + getRoleEntity().hashCode();
-        //result = 31 * result + (getMeetings() != null ? getMeetings().hashCode() : 0);
         return result;
     }
 

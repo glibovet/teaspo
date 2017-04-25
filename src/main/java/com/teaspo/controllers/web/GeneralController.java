@@ -5,10 +5,7 @@ import com.teaspo.persistence.dao.MeetingRepository;
 import com.teaspo.services.utils.IMeetingService;
 import com.teaspo.persistence.dao.PlaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -78,6 +75,8 @@ public class GeneralController {
     }
     @RequestMapping(value="/events/{id}", method=RequestMethod.GET)
     public ModelAndView eventShow(@PathVariable("id") int id){
+
+
         ModelAndView model=new ModelAndView();
         model.addObject("event", meetingRepository.findOne(id));
         model.setViewName("event/eventShow");
