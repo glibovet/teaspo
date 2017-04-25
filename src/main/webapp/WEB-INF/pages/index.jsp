@@ -47,7 +47,7 @@
             crossorigin="anonymous"></script>
 
     <!--LESS-->
-    <link rel="stylesheet/less" type="text/css" href="/resources/less/main.less"/>
+    <link rel="stylesheet/less" type="text/css" href="../../resources/less/main.less"/>
     <!-- LESS JavaScript компілятор -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
 
@@ -91,19 +91,18 @@
         <li class="hidden-xs codrops-icon codrops-icon-prev left">
             <text style="font-size:30px;font-family:Oswald; padding:20px;" ;>TEASPO</text>
         </li>
-        <li><a class="codrops-icon codrops-icon-prev right" href="">
-            <text class="glyphicon glyphicon-cog" style="font-size:20px;"></text>
-        </a></li>
         <c:choose>
             <c:when test="${loggedIn}">
-                <li><a class="codrops-icon codrops-icon-drop right" href="">
+                <li><a class="codrops-icon codrops-icon-drop" href="">
                     <text class="glyphicon glyphicon-user" style="font-size:20px;"></text>
-                    <span class="hidden-xs"> Профіль </span></a></li>
+                    <span class="hidden-xs"> ACCOUNT </span></a></li>
+                   <li> <a href="/logout" class="hidden-xs right"> LOGOUT </a></li>
+
             </c:when>
             <c:otherwise>
                 <li><a class="codrops-icon codrops-icon-drop right" href="/login">
                     <text class="glyphicon glyphicon-user" style="font-size:20px;"></text>
-                    <span class="hidden-xs"> Увійти</span></a></li>
+                    <span class="hidden-xs"> LOGIN</span></a></li>
             </c:otherwise>
         </c:choose>
 
@@ -176,11 +175,10 @@
                             </c:choose>
 
                         </div>
-                        <p class="detail">${event.description}</p>
-                        <p class="time">${event.datetime}</p>
-                        <a href="/meeting/${event.id}" class="btn glyphicon glyphicon-menu-right"></a>
-
-
+                        <p class="detail"><label>Description: </label> ${event.description}</p>
+                        <p class="detail"><label>Sport type: </label> ${event.type}</p>
+                        <p class="detail"><label>Capacity: </label> ${event.capacity}</p>
+                        <a href="/events/${event.id}" class="btn btn2 glyphicon glyphicon-menu-right"></a>
                     </div>
                 </div>
             </c:forEach>

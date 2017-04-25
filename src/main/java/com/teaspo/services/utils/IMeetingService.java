@@ -20,4 +20,8 @@ public interface IMeetingService {
     int create(MeetingView view) throws ServiceErrorException, SuchEntityExistsExeption;
 
     MeetingEntity update (MeetingView view) throws NoSuchEntityException;
+//
+//    MeetingEntity subscribe (int MeetingId) throws NoSuchEntityException;
+//
+//    MeetingEntity unsubscribe (int MeetingId) throws NoSuchEntityException;
 }

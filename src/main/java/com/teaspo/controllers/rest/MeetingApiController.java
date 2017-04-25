@@ -70,4 +70,29 @@ public class MeetingApiController {
     ) throws NoSuchEntityException {
         return responseFactory.get(meetingService.update(view));
     }
+//
+//    @RequestMapping(
+//            value = "/{id}/subscribe",
+//            method = RequestMethod.POST
+//    )
+//    public
+//    @ResponseBody Response<MeetingEntity>
+//    subscribe(
+//            @PathVariable("id") int meetingId
+//    ) throws NoSuchEntityException {
+//        return responseFactory.get(meetingService.subscribe(meetingId));
+//    }
+//
+//    @RequestMapping(
+//            value = "/{id}/unsubscribe",
+//            method = RequestMethod.POST
+//    )
+//    public
+//    @ResponseBody Response<MeetingEntity>
+//    unsubscribe(
+//            @PathVariable("id") int meetingId
+//    ) throws NoSuchEntityException {
+//        return responseFactory.get(meetingService.unsubscribe(meetingId));
+//    }
+
 }

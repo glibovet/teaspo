@@ -146,6 +146,7 @@ public class UserServiceImpl implements IUserService {
         updatedUser.setPassword(userData.getPassword());
         updatedUser.setActive(userData.isActive());
         updatedUser.setRoleEntity(userData.getRoleEntity());
+        updatedUser.setMeetings(userData.getMeetings());
         usersRepository.saveAndFlush(updatedUser);
         return updatedUser;
     }

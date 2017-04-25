@@ -98,10 +98,31 @@ public class MeetingServiceImpl implements IMeetingService {
         entity.setLongitude(view.getLongitude());
         entity.setCapacity(view.getCapacity());
         entity.setDatetime(view.getDatetime());
+        entity.setSubscribers(view.getSubscribers());
         entity.setUserEntity(usersRepository.findOne(view.getUserEntityId()));
         entity.setPlaceEntity(placeRepository.findOne(view.getPlaceEntityId()));
         meetingRepository.saveAndFlush(entity);
         return entity;
 
     }
+
+//    @Override
+//    @Transactional
+//    public MeetingEntity subscribe(int meetingId){
+//        MeetingEntity meetingEntity = meetingRepository.findOne(meetingId);
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+//        meetingEntity.getSubscribers().add(usersRepository.findByEmail(userDetail.getUsername()));
+//        return meetingEntity;
+//    }
+
+//    @Override
+//    @Transactional
+//    public MeetingEntity unsubscribe(int meetingId){
+//        MeetingEntity meetingEntity = meetingRepository.findOne(meetingId);
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+//        meetingEntity.getSubscribers().remove(usersRepository.findByEmail(userDetail.getUsername()));
+//        return meetingEntity;
+//    }
 }
